@@ -8,13 +8,13 @@ class Student(models.Model):
     first_name = models.CharField(
         max_length=100,
         verbose_name='first name',
-        db_column='first_name',
+        db_column='first_name_column',
         validators=[MinLengthValidator(2, '"first_name" field value less that two symbols')]
     )
     last_name = models.CharField(
         max_length=100,
         verbose_name='last name',
-        db_column='last_name',
+        db_column='last_name_column',
         validators=[MinLengthValidator(2)],
         error_messages={'min_length': '"last_name" field value less that two symbols'}
     )
@@ -22,3 +22,6 @@ class Student(models.Model):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+    class Meta:
+        db_table = 'student_table'
