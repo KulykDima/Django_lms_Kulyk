@@ -2,8 +2,6 @@
 from django.core.exceptions import ValidationError
 from django.utils.deconstruct import deconstructible
 
-import students.models
-
 
 def valid_email_domains(value):
     valid_domains = ['@gmail.com', '@yahoo.com']
@@ -12,7 +10,6 @@ def valid_email_domains(value):
             break
     else:
         raise ValidationError(f'Email {value} is incorrect address.')
-
 
 @deconstructible
 class ValidEmailDomain:
@@ -25,9 +22,3 @@ class ValidEmailDomain:
                 break
         else:
             raise ValidationError(f'Email is incorrect address. The domain <{args[0].split("@")[1]}> not valid')
-
-
-def validate_unique_email(value):
-    if students.models.Student.objects.filter(email=value).count() > 0:
-        raise ValidationError(f'Email {value} is exists')
-    return value
