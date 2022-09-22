@@ -2,9 +2,10 @@ from datetime import date
 
 from django.core.validators import MinLengthValidator
 from django.db import models
-from faker import Faker
 
-from .validators import valid_email_domains, ValidEmailDomain
+from faker import Faker
+from .validators import valid_email_domains, ValidEmailDomain   # noqa
+from .validators import validate_unique_email
 
 VALID_DOMAIN_LIST = ('@gmail.com', '@yahoo.com')
 
@@ -25,8 +26,8 @@ class Student(models.Model):
     )
     birthday = models.DateField(default=date.today, null=True, blank=True)
 
-    # email = models.EmailField(validators=[valid_email_domains])
-    email = models.EmailField(validators=[ValidEmailDomain(*VALID_DOMAIN_LIST)])
+    # email = models.EmailField(validators=[ValidEmailDomain(*VALID_DOMAIN_LIST)])
+    email = models.EmailField(validators=[validate_unique_email])
 
     def __str__(self):
         return f'{self.pk}: {self.first_name} {self.last_name}'
@@ -45,7 +46,6 @@ class Student(models.Model):
             birthday = f.date()
             st = cls(first_name=first_name, last_name=last_name, birthday=birthday, email=email)
             try:
-
                 st.full_clean()
                 st.save()
             except:
