@@ -13,6 +13,7 @@ def valid_email_domains(value):
     else:
         raise ValidationError(f'Email {value} is incorrect address.')
 
+
 @deconstructible
 class ValidEmailDomain:
     def __init__(self, *domains):
