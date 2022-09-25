@@ -6,7 +6,7 @@ from django.shortcuts import render         # noqa
 from webargs.djangoparser import use_args
 from webargs.fields import Str
 
-from .forms import CreateStudentForm
+from .forms import CreateStudentForm, EditStudentForm
 from .models import Student
 from .utils import qs2html
 
@@ -75,3 +75,26 @@ def create_student(request):
                 '''
 
     return HttpResponse(html_form)
+
+
+def edit_student(request, student_id):
+    # EditStudentForm
+    post = Student.objects.get(id=student_id)
+    form = EditStudentForm(request.POST or None, instance=post)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/students/')
+
+    token = get_token(request)
+    html = f'''
+            <form method="post">
+            <h1>Update Student</h1>
+            <h2>{post.first_name} {post.last_name}</h2>
+            <input type="hidden" name="csrfmiddlewaretoken" value="{token}">
+                <table>
+                    {form.as_table()}
+                </table>
+                <input type="submit" value="Submit">
+            </form>
+    '''
+    return HttpResponse(html)
