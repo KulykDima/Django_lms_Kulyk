@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
     path('students/', get_students),
-    path('students/create', create_student),
+    path('students/create/', create_student),
     path('students/edit/<int:student_id>', edit_student),
 ]
 
