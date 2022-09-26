@@ -116,6 +116,4 @@ def edit_student(request, student_id):
             </form>
     '''
     return HttpResponse(html)
-            </form> 
-            '''
-    return HttpResponse(html_form)
+
