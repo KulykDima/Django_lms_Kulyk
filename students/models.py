@@ -56,5 +56,5 @@ class Student(models.Model):
 
                 st.full_clean()
                 st.save()
-            except:
+            except ValueError:
                 print('Incorrect data')

@@ -7,7 +7,6 @@ from webargs.djangoparser import use_args
 from webargs.fields import Str
 
 from .forms import CreateStudentForm, EditStudentForm
-from .forms import CreateStudentForm
 from .models import Student
 from .utils import qs2html
 
@@ -22,7 +21,7 @@ def index(request):
         'last_name': Str(required=False),
     },
     location='query'
-)
+ )
 def get_students(request, args):
     students = Student.objects.all()
 
@@ -31,21 +30,6 @@ def get_students(request, args):
             Q(first_name=args.get('first_name', '')) | Q(last_name=args.get('last_name', ''))
         )
 
-        # if 'first_name' in args:
-        #     students = students.filter(first_name=args['first_name'])
-        #
-        # if 'last_name' in args:
-        #     students = students.filter(last_name=args['last_name'])
-
-    html_form = '''
-            <form method="get">
-                <label for="first_name">First name:</label><br>
-                <input type="text" id="first_name" name="first_name" placeholder="John"><br>
-                <label for="last_name">Last name:</label><br>
-                <input type="text" id="last_name" name="last_name" placeholder="Doe"><br><br>
-                <input type="submit" value="Submit">
-                </form> 
-            '''
     # if 'first_name' in args:
     #     students = students.filter(first_name=args['first_name'])
     #
@@ -116,4 +100,3 @@ def edit_student(request, student_id):
             </form>
     '''
     return HttpResponse(html)
-
