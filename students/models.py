@@ -29,6 +29,13 @@ class Student(models.Model):
     email = models.EmailField(validators=[validate_unique_email])
     # email = models.EmailField(validators=[ValidEmailDomain(*VALID_DOMAIN_LIST)])
 
+    phone = models.CharField(
+        default='Отсутствует',
+        max_length=20,
+        verbose_name='phone',
+        db_column='phone',
+    )
+
     def __str__(self):
         return f'{self.pk}: {self.first_name} {self.last_name}'
 
