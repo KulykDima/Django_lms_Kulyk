@@ -2,10 +2,11 @@ from datetime import date
 
 from django.core.validators import MinLengthValidator
 from django.db import models
+
 from faker import Faker
 
-from .validators import valid_email_domains, ValidEmailDomain
-
+from .validators import valid_email_domains, ValidEmailDomain   # noqa
+from .validators import validate_unique_email
 VALID_DOMAIN_LIST = ('@gmail.com', '@yahoo.com')
 
 
@@ -25,8 +26,8 @@ class Student(models.Model):
     )
     birthday = models.DateField(default=date.today, null=True, blank=True)
 
-    # email = models.EmailField(validators=[valid_email_domains])
-    email = models.EmailField(validators=[ValidEmailDomain(*VALID_DOMAIN_LIST)])
+    email = models.EmailField(validators=[validate_unique_email])
+    # email = models.EmailField(validators=[ValidEmailDomain(*VALID_DOMAIN_LIST)])
 
     phone = models.CharField(
         default='Отсутствует',

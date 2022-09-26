@@ -7,6 +7,7 @@ from webargs.djangoparser import use_args
 from webargs.fields import Str
 
 from .forms import CreateStudentForm, EditStudentForm
+from .forms import CreateStudentForm
 from .models import Student
 from .utils import qs2html
 
@@ -45,6 +46,21 @@ def get_students(request, args):
                 <input type="submit" value="Submit">
                 </form> 
             '''
+    # if 'first_name' in args:
+    #     students = students.filter(first_name=args['first_name'])
+    #
+    # if 'last_name' in args:
+    #     students = students.filter(last_name=args['last_name'])
+
+    html_form = '''
+        <form method="get">
+            <label for="first_name">First name:</label><br>
+            <input type="text" id="first_name" name="first_name" placeholder="John"><br>
+            <label for="last_name">Last name:</label><br>
+            <input type="text" id="last_name" name="last_name" placeholder="Doe"><br><br>
+            <input type="submit" value="Submit">
+            </form> 
+        '''
 
     html = qs2html(students)
 
@@ -91,6 +107,8 @@ def edit_student(request, student_id):
             <h1>Update Student</h1>
             <h2>{post.first_name} {post.last_name}</h2>
             <input type="hidden" name="csrfmiddlewaretoken" value="{token}">
+            <form method="post">
+                <input type="hidden" name="csrfmiddlewaretoken" value="{token}">
                 <table>
                     {form.as_table()}
                 </table>
@@ -98,3 +116,6 @@ def edit_student(request, student_id):
             </form>
     '''
     return HttpResponse(html)
+            </form> 
+            '''
+    return HttpResponse(html_form)
