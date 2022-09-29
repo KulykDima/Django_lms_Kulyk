@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+    </style>
+    <meta charset="UTF-8">
+    <title>List of Teachers</title>
+</head>
+<body>
+    <p><a href="/groups/">Back to groups</a> | <a href="/students/">Back to students</a></p>
+    <h1>List of Teachers</h1>
+    <table>
+    {% for teacher in teachers %}
+        <tr>
+            <td>{{ teacher.pk }}</td>
+            <td><a href="detail/{{ teacher.pk }}">{{ teacher.first_name }}</a></td>
+            <td>{{ teacher.last_name }}</td>
+            <td>{{ teacher.phone }}</td>
+            <td><a href="edit/{{ teacher.pk }}"><b>Edit</b></a></td>
+        </tr>
+    {% endfor %}
+    </table>
+</body>
+</html>
