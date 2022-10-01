@@ -1,13 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+
+{% block title %}
+Group {{ group.group_name }}
+{% endblock %}
+
+{% block content %}
 <head>
     <meta charset="UTF-8">
     <title>Group - {{ group.group_name }}</title>
 </head>
 <body>
-    <h1><b>Group name</b> - <a href="/groups/edit/{{ group.pk }}">{{ group.group_name }}</a></h1>
+    <h1><b>Group name</b> - <a href="{% url 'group:edit' group.pk %}">{{ group.group_name }}</a></h1>
     <p><b>Description</b> - {{ group.group_description }}</p>
     <p><b>Date of start</b> - {{ group.date_of_start }}</p>
-    <a href="/groups/">Back to list</a>
+    <a href="{% url 'group:list' %}">Back to list</a>
 </body>
-</html>
+{% endblock %}>
