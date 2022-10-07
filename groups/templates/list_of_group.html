@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+    </style>
+    <meta charset="UTF-8">
+    <title>List of Groups</title>
+</head>
+<body>
+    <p><a href="/teachers/">Back to teachers</a> | <a href="/students/">Back to students</a></p>
+    <form method="get">
+    <label for="group_name">Group name:</label><br>
+    <input type="text" id="group_name" name="group_name" placeholder="Enter name"><br>
+</form>
+<br>
+    <h1>List of Groups</h1>
+    <table>
+    {% for group in groups %}
+        <tr>
+            <td>{{ group.pk }}</td>
+            <td><a href="detail/{{ group.pk }}">{{ group.group_name }}</a></td>
+            <td>{{ group.date_of_start }}</td>
+            <td><a href="edit/{{ group.pk }}"><b>Edit</b></a></td>
+        </tr>
+    {% endfor %}
+    </table>
+</body>
+</html>

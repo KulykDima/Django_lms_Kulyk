@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher - {{ teacher.first_name }}</title>
+</head>
+<body>
+    <p1> <b>Name</b> - <a href="/teachers/edit/{{ teacher.pk }}">{{ teacher.first_name }}</a></p1>
+    <p><b>Last name</b> - {{ teacher.last_name }}</p>
+    <p><b>Phone</b> - {{ teacher.phone }}</p>
+    <a href="/teachers/">Back to list</a>
+</body>
+</html>

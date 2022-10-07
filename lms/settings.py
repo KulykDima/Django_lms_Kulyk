@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'students.apps.StudentsConfig',
 
     'groups.apps.GroupsConfig',
+
+    'teachers.apps.TeachersConfig',
 ]
 
 MIDDLEWARE = [
