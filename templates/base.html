@@ -4,19 +4,29 @@
     <meta charset="UTF-8">
     <title>LMS - {% block title %}{% endblock %}</title>
     <style>
-        #menu {
-            font-family: arial, sans-serif;
-            width: 50%;
-        }
-        {% block custom_css %}{% endblock %}
+        table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
     </style>
 </head>
 <body>
     <table id="menu">
         <tr>
-            <td style="margin: 5px; padding: 5px"><a href="{% url 'home' %}">Home</a></td>
-            <td style="margin: 5px; padding: 5px"><a href="{% url 'student:list' %}">List</a></td>
-            <td style="margin: 5px; padding: 5px"><a href="{% url 'student:create' %}">Create</a></td>
+            <th style="margin: 5px; padding: 5px"><a href="{% url 'home' %}">Home</a></th>
+            <td style="margin: 5px; padding: 5px"><a href="{% url 'student:list' %}">List of students</a></td>
+            <td style="margin: 5px; padding: 5px"><a href="{% url 'group:list' %}">List of groups</a></td>
+            <td style="margin: 5px; padding: 5px"><a href="{% url 'teacher:list' %}">List of teachers</a></td>
+            <th style="margin: 5px; padding: 5px"><a href="{% url 'student:create' %}">Create a Student</a></th>
+            <th style="margin: 5px; padding: 5px"><a href="{% url 'group:create' %}">Create a Group</a></th>
+            <th style="margin: 5px; padding: 5px"><a href="{% url 'teacher:create' %}">Create a Teacher</a></th>
         </tr>
     </table>
     <br><br>
