@@ -1,5 +1,6 @@
 from datetime import date
 
+from dateutil.relativedelta import relativedelta
 from django.core.validators import MinLengthValidator
 from django.db import models
 
@@ -41,6 +42,9 @@ class Student(models.Model):
 
     class Meta:
         db_table = 'student_table'
+
+    def get_age(self):
+        return relativedelta(date.today(), self.birthday).years
 
     @classmethod
     def generate_fake_data(cls, cnt):
