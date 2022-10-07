@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
 
-{% block title %}
-Teacher {{ teacher.last_name }}
-{% endblock %}
+{% block title %}Detail of {{ teacher.first_name }}{% endblock %}
 
 {% block content %}
-
-<head>
-    <meta charset="UTF-8">
-    <title>Teacher - {{ teacher.first_name }}</title>
-</head>
-<body>
-    <p1> <b>Name</b> - <a href="{% url 'teacher:edit' teacher.pk %}">{{ teacher.first_name }}</a></p1>
-    <p><b>Last name</b> - {{ teacher.last_name }}</p>
-    <p><b>Phone</b> - {{ teacher.phone }}</p>
-    <a href="{% url 'teacher:list' %}">Back to list</a>
-</body>
-
+    <div class="row">
+    <div class="col-4"></div>
+    <div class="col">
+        <div class="card" style="width: 18rem;">
+  <div class="card-header">
+      <a href="{% url 'teacher:edit' teacher.pk %}">{{ teacher.first_name }}</a> {{ teacher.last_name }}
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ teacher.phone }}</li>
+  </ul>
+        <a class="btn btn-outline-primary mt-3" href="{% url 'teacher:list' %}">Back to list</a>
+    </div>
+        <div class="col-4"></div>
+</div>
+    </div>
 {% endblock %}

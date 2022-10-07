@@ -1,18 +1,22 @@
 {% extends 'base.html' %}
 
-{% block title %}
-Group {{ group.group_name }}
-{% endblock %}
+{% block title %}Detail of {{ group.group_name }}{% endblock %}
 
 {% block content %}
-<head>
-    <meta charset="UTF-8">
-    <title>Group - {{ group.group_name }}</title>
-</head>
-<body>
-    <h1><b>Group name</b> - <a href="{% url 'group:edit' group.pk %}">{{ group.group_name }}</a></h1>
-    <p><b>Description</b> - {{ group.group_description }}</p>
-    <p><b>Date of start</b> - {{ group.date_of_start }}</p>
-    <a href="{% url 'group:list' %}">Back to list</a>
-</body>
-{% endblock %}>
+    <div class="row">
+    <div class="col-4"></div>
+    <div class="col">
+        <div class="card" style="width: 18rem;">
+  <div class="card-header">
+      <a href="{% url 'group:edit' group.pk %}"> {{ group.group_name }}</a>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ group.group_description }}</li>
+    <li class="list-group-item">{{ group.date_of_start }}</li>
+  </ul>
+        <a class="btn btn-outline-primary mt-3" href="{% url 'group:list' %}">Back to list</a>
+    </div>
+        <div class="col-4"></div>
+</div>
+    </div>
+{% endblock %}
