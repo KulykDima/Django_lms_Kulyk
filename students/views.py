@@ -1,18 +1,13 @@
 from django.db.models import Q
-from django.http import HttpResponse, HttpResponseRedirect
-from django.middleware.csrf import get_token
-from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 
 from webargs.djangoparser import use_args
 from webargs.fields import Str
 
 from .forms import CreateStudentForm, EditStudentForm
 from .models import Student
-# from .utils import qs2html
-
-
-def index(request):
-    return HttpResponse('Welcome to LMS')
 
 
 @use_args(
@@ -53,13 +48,14 @@ def get_students(request, args):
 
 
 def detail_student(request, student_id):
-    student = Student.objects.get(pk=student_id)
+    student = get_object_or_404(Student, id=student_id)
     return render(request=request,
                   template_name='students/details.html',
                   context={
                       'title': 'Student',
                       'student': student
                   })
+
 
 def create_student(request):
     # CreateStudentForm
@@ -70,42 +66,27 @@ def create_student(request):
         form = CreateStudentForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/students/')
+            return HttpResponseRedirect(reverse('student:list'))
 
-    token = get_token(request)
-    html_form = f'''
-                <form method="post">
-                    <input type="hidden" name="csrfmiddlewaretoken" value="{token}">
-                    <table>
-                        {form.as_table()}
-                    </table>
-                    <input type="submit" value="Submit">
-                </form> 
-                '''
-
-    return HttpResponse(html_form)
+    return render(request, 'students/create.html', {'form': form})
 
 
 def edit_student(request, student_id):
     # EditStudentForm
-    post = Student.objects.get(id=student_id)
+    post = get_object_or_404(Student, id=student_id)
     form = EditStudentForm(request.POST or None, instance=post)
     if form.is_valid():
         form.save()
-        return HttpResponseRedirect('/students/')
+        return HttpResponseRedirect(reverse('student:list'))
 
-    token = get_token(request)
-    html = f'''
-            <form method="post">
-            <h1>Update Student</h1>
-            <h2>{post.first_name} {post.last_name}</h2>
-            <input type="hidden" name="csrfmiddlewaretoken" value="{token}">
-            <form method="post">
-                <input type="hidden" name="csrfmiddlewaretoken" value="{token}">
-                <table>
-                    {form.as_table()}
-                </table>
-                <input type="submit" value="Submit">
-            </form>
-    '''
-    return HttpResponse(html)
+    return render(request, 'students/edit.html', {'form': form})
+
+
+def delete_student(request, student_id):
+    student = Student.objects.get(id=student_id)
+
+    if request.method == 'POST':
+        student.delete()
+        return HttpResponseRedirect(reverse('student:list'))
+
+    return render(request, 'students/delete.html', {'student': student})
