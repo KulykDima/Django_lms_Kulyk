@@ -1,30 +1,27 @@
-from django.db.models import Q
+from django.db.models import Q      # noqa
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
-from webargs.djangoparser import use_args
-from webargs.fields import Str
-
-from .forms import CreateStudentForm, EditStudentForm
+from .forms import CreateStudentForm, EditStudentForm, StudentFilterForm
 from .models import Student
 
 
-@use_args(
-    {
-        'first_name': Str(required=False),
-        'last_name': Str(required=False),
-    },
-    location='query'
- )
-def get_students(request, args):
+# @use_args(
+#     {
+#         'first_name': Str(required=False),
+#         'last_name': Str(required=False),
+#     },
+#     location='query'
+#  )
+def get_students(request):
     students = Student.objects.all()
 
-    if len(args) != 0 and args.get('first_name') or args.get('last_name'):
-        students = students.filter(
-            Q(first_name=args.get('first_name', '')) | Q(last_name=args.get('last_name', ''))
-        )
-
+    filter_form = StudentFilterForm(data=request.GET, queryset=students)
+    # if len(args) != 0 and args.get('first_name') or args.get('last_name'):
+    #     students = students.filter(
+    #         Q(first_name=args.get('first_name', '')) | Q(last_name=args.get('last_name', ''))
+    #         )
     # if 'first_name' in args:
     #     students = students.filter(first_name=args['first_name'])
     #
@@ -42,8 +39,9 @@ def get_students(request, args):
     return render(request=request,
                   template_name='students/list.html',
                   context={
-                      'title': 'List of students',
-                      'students': students
+                      # 'title': 'List of students',
+                      # 'students': students,
+                      'filter_form': filter_form
                   })
 
 

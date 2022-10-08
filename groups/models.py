@@ -19,3 +19,8 @@ class Group(models.Model):
         blank=True
     )
     date_of_start = models.DateField(default=date.today, null=False, blank=True, validators=[validate_start_date])
+
+    end_date = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return f'Group name: {self.group_name}'

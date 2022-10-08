@@ -5,10 +5,16 @@ Edit student
 {% endblock %}
 
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    <p>Do you really want to remove "{{ student.last_name }} {{ student.first_name }}"?</p>
-    <input type="submit" value="Agree">
-    <a href="{% url 'student:list' %}">Cancel</a>
+     <div class="row">
+        <div class="col-3"></div>
+        <div class="col">
+            <form method="post">
+                {% csrf_token %}
+                <p>Do you really want to remove "{{ student.last_name }} {{ student.first_name }}"?</p>
+                <button class="btn btn-outline-danger mt-3" type="submit">Delete</button>
+                    <a class="btn btn-outline-primary mt-3" href="{% url 'student:list' %}">Back to list</a>
 </form>
+                      </div>
+        <div class="col-3"></div>
+    </div>
 {% endblock %}
