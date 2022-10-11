@@ -1,4 +1,5 @@
 from django import forms
+from django_filters import FilterSet
 
 from groups.models import Group
 
@@ -28,4 +29,12 @@ class EditGroup(forms.ModelForm):
 
         widgets = {
             'date_of_start': forms.DateInput(attrs={'type': 'date'})
+        }
+
+
+class GroupFilterSet(FilterSet):
+    class Meta:
+        model = Group
+        fields = {
+            'group_name': ['exact'],
         }

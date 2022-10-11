@@ -1,31 +1,18 @@
-from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from groups.forms import CreateGroupForm, EditGroup
+from groups.forms import CreateGroupForm, EditGroup, GroupFilterSet
 from groups.models import Group
 
-from webargs.djangoparser import use_args
-from webargs.fields import Str
 
-
-@use_args(
-    {
-        'group_name': Str(required=False)
-    },
-    location='query'
-)
-def get_groups(request, args):
+def get_groups(request):
     groups = Group.objects.all()
-    if len(args) != 0 and args.get('group_name'):
-        groups = groups.filter(
-            Q(group_name=args.get('group_name'))
-        )
+    filter_form = GroupFilterSet(data=request.GET, queryset=groups)
     return render(request=request,
                   template_name='list_of_group.html',
                   context={
-                      'groups': groups
+                      'filter_form': filter_form
                   })
 
 

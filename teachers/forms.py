@@ -1,6 +1,7 @@
 import re
 
 from django import forms
+from django_filters import FilterSet
 
 from teachers.models import Teacher
 
@@ -59,3 +60,12 @@ class EditTeacher(forms.ModelForm):
         value = self.cleaned_data.get('phone')
         values = re.sub(r'[^0-9+\-()]', r'', value)
         return values
+
+
+class TeacherFilterForm(FilterSet):
+    class Meta:
+        model = Teacher
+        fields = {
+            'first_name': ['exact', 'icontains'],
+            'last_name': ['exact', 'startswith']
+        }
