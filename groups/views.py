@@ -26,13 +26,16 @@ def detail_group(request, group_id):
 
 
 def edit_group(request, group_id):
-    post = get_object_or_404(Group, id=group_id)
-    form = EditGroup(request.POST or None, instance=post)
-    if form.is_valid():
-        form.save()
-        return HttpResponseRedirect(reverse('group:list'))
+    group = get_object_or_404(Group, pk=group_id)
+    if request.method == 'POST':
+        form = EditGroup(instance=group, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('group:list'))
 
-    return render(request, 'edit_g.html', {'form': form})
+    form = EditGroup(instance=group)
+
+    return render(request, 'edit_g.html', {'form': form, 'group': group})
 
 
 def create_group(request):

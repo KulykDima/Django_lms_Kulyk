@@ -30,6 +30,7 @@
                 <th>N</th>
                 <th>Group Name</th>
                 <th>Date of start</th>
+                <th>Headman</th>
                 <th><i class="bi bi-pencil-fill"></i></th>
                 <th><i class="bi bi-trash3-fill"></i></th>
             </tr>
@@ -40,6 +41,9 @@
                 <td>{{ forloop.counter }}</td>
                 <td><a href="{% url 'group:detail' group.pk %}">{{ group.group_name }}</a></td>
                 <td>{{ group.date_of_start }}</td>
+                <td>{% if group.headman %}
+                        {{ group.headman.first_name }} {{ group.headman.last_name }}
+                    {% endif %}</td>
                 <td><a class="btn btn-outline-primary"  href="{% url 'group:edit' group.pk %}">Edit</a></td>
                 <td><a class="btn btn-outline-danger" href="{% url 'group:delete' group.pk %}">Delete</a></td>
             </tr>

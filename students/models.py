@@ -41,7 +41,10 @@ class Student(models.Model):
     group = models.ForeignKey(Group, on_delete=models.CASCADE, null=True, related_name='students')
 
     def __str__(self):
-        return f'{self.pk}: {self.first_name} {self.last_name}'
+        if self.group is None:
+            return f'{self.first_name} {self.last_name}'
+        else:
+            return f'{self.first_name} {self.last_name} ({self.group.group_name})'
 
     class Meta:
         db_table = 'student_table'

@@ -22,5 +22,7 @@ class Group(models.Model):
 
     end_date = models.DateField(null=True, blank=True)
 
+    headman = models.OneToOneField('students.Student', on_delete=models.SET_NULL, null=True, blank=True, related_name='headman_group')
+
     def __str__(self):
         return f'Group name: {self.group_name}'
