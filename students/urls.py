@@ -2,7 +2,7 @@
 from django.urls import path
 
 
-from students.views import create_student, detail_student, delete_student
+from students.views import create_student, delete_student, detail_student
 from students.views import edit_student
 from students.views import get_students
 
