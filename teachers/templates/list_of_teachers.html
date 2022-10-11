@@ -1,38 +1,49 @@
 {% extends 'base.html' %}
 
-{% block title %}
-List of Teachers
-{% endblock %}
+{% block title %}List of Teachers{% endblock %}
 
 {% block content %}
-    <style>
-        table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-    </style>
-    <meta charset="UTF-8">
-    <title>List of Groups</title>
-<body>
-<br>
-    <h1>List of Groups</h1>
-    <table>
-    {% for teacher in teachers %}
-        <tr>
-            <td><a href="{% url 'teacher:detail' teacher.pk %}">{{ teacher.first_name }}</a></td>
-            <td>{{ teacher.last_name }}</td>
-            <td>{{ teacher.phone }}</td>
-            <td><a href="{% url 'teacher:edit' teacher.pk %}"><b>Edit</b></a></td>
-            <td><a href="{% url 'teacher:delete' teacher.pk %}">Delete</a></td>
-        </tr>
-    {% endfor %}
-    </table>
-</body>
+    <div class="row mb-3">
+        <div class="col">
+            <form method="get">
+                <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingGroupName" placeholder="A" name="first_name">
+                <label for="floatingInput">Teacher Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingGroupName" placeholder="A" name="last_name">
+                <label for="floatingInput">Teacher Last Name</label>
+                </div>
+                <input class="btn-outline-primary mt-3" type="submit" value="Search">
+            </form>
+        </div>
+        <div class="col-6"></div>
+    </div>
+    <br>
+    <div class="row">
+        <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone</th>
+                <th><i class="bi bi-pencil-fill"></i></th>
+                <th><i class="bi bi-trash3-fill"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for teacher in teachers %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><a href="{% url 'teacher:detail' teacher.pk %}">{{teacher.first_name }}</a></td>
+                <td>{{ teacher.last_name }}</td>
+                <td>{{ teacher.phone }}</td>
+                <td><a class="btn btn-outline-primary"  href="{% url 'teacher:edit' teacher.pk %}">Edit</a></td>
+                <td><a class="btn btn-outline-danger" href="{% url 'teacher:delete' teacher.pk %}">Delete</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>
 {% endblock %}

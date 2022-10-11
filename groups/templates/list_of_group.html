@@ -1,42 +1,43 @@
 {% extends 'base.html' %}
 
-{% block title %}
-List of Groups
-{% endblock %}
+{% block title %}List of Groups{% endblock %}
 
 {% block content %}
-    <style>
-        table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-    </style>
-    <meta charset="UTF-8">
-    <title>List of Groups</title>
-<body>
-    <form method="get">
-    <label for="group_name">Group name:</label><br>
-    <input type="text" id="group_name" name="group_name" placeholder="Enter name"><br>
-</form>
-<br>
-    <h1>List of Groups</h1>
-    <table>
-    {% for group in groups %}
-        <tr>
-            <td>{{ group.pk }}</td>
-            <td><a href="{% url 'group:detail' group.pk %}">{{ group.group_name }}</a></td>
-            <td>{{ group.date_of_start }}</td>
-            <td><a href="{% url 'group:edit' group.pk %}"><b>Edit</b></a></td>
-            <td><a href="{% url 'group:delete' group.pk %}">Delete</a></td>
-        </tr>
-    {% endfor %}
-    </table>
-</body>
+    <div class="row mb-3">
+        <div class="col">
+            <form method="get">
+                <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingGroupName" placeholder="A" name="group_name">
+                <label for="floatingInput">Group name</label>
+                </div>
+                <input class="btn-outline-primary mt-3" type="submit" value="Search">
+            </form>
+        </div>
+        <div class="col-6"></div>
+    </div>
+    <br>
+    <div class="row">
+        <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Group Name</th>
+                <th>Date of start</th>
+                <th><i class="bi bi-pencil-fill"></i></th>
+                <th><i class="bi bi-trash3-fill"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for group in groups %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><a href="{% url 'group:detail' group.pk %}">{{group.group_name }}</a></td>
+                <td>{{ group.date_of_start }}</td>
+                <td><a class="btn btn-outline-primary"  href="{% url 'group:edit' group.pk %}">Edit</a></td>
+                <td><a class="btn btn-outline-danger" href="{% url 'group:delete' group.pk %}">Delete</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>
 {% endblock %}

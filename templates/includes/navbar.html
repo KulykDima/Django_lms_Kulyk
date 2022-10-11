@@ -21,6 +21,25 @@
             <li><a class="dropdown-item" href="{% url 'student:create' %}">Create Student</a></li>
             <li><a class="dropdown-item" href="{% url 'student:list' %}">List</a></li>
           </ul>
+           <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Groups
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'group:create' %}">Create Group</a></li>
+            <li><a class="dropdown-item" href="{% url 'group:list' %}">List</a></li>
+          </ul>
+           <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Teachers
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'teacher:create' %}">Create Teacher</a></li>
+            <li><a class="dropdown-item" href="{% url 'teacher:list' %}">List</a></li>
+          </ul>
+          <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

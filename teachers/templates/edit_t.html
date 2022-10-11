@@ -10,7 +10,7 @@ Edit teacher
     <table>
         {{ form.as_table }}
     </table>
-    <input type="submit" value="Edit">
-    <a href="{% url 'teacher:list' %}">Cancel</a>
+    <button class="btn btn-outline-success mt-3" type="submit">Edit</button>
+    <a class="btn btn-outline-primary mt-3" href="{% url 'teacher:list' %}">Back to list</a>
 </form>
 {% endblock %}
