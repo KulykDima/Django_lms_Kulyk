@@ -142,7 +142,7 @@ STATIC_ROOT = BASE_DIR / 'static'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 USE_L10N = False
-DATE_FORMAT = 'd m Y'
+DATE_FORMAT = 'Y m d'
 
 if DEBUG:
     SHELL_PLUS = 'ipython'
