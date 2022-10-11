@@ -6,6 +6,7 @@ from django.db import models
 
 from faker import Faker
 
+from groups.models import Group
 from .validators import valid_email_domains, ValidEmailDomain   # noqa
 from .validators import validate_unique_email
 VALID_DOMAIN_LIST = ('@gmail.com', '@yahoo.com')
@@ -36,6 +37,7 @@ class Student(models.Model):
         verbose_name='phone',
         db_column='phone',
     )
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, null=True, related_name='students')
 
     def __str__(self):
         return f'{self.pk}: {self.first_name} {self.last_name}'
