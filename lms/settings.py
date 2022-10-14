@@ -53,6 +53,8 @@ INSTALLED_APPS = [
 
     'teachers.apps.TeachersConfig',
 
+    'Courses.apps.CoursesConfig',
+
     "debug_toolbar",
 ]
 
