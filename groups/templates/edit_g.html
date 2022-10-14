@@ -22,7 +22,7 @@ Edit group
         <div class="col-3"></div>
     </div>
     <div class="row">
-        {%  with objects_list=group.students.all group_on=False %}
+        {%  with objects_list=students.students.all group_on=False %}
             {% include 'includes/students_table.html' %}
         {% endwith %}
     </div>

@@ -26,5 +26,10 @@ class Teacher(models.Model):
         null=True,
     )
 
+    salary = models.PositiveIntegerField(default=10_000)
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name} ({self.salary})'
+
     class Meta:
         db_table = 'teacher_table'
