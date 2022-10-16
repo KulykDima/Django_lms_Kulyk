@@ -15,7 +15,7 @@ from .models import Student
 #     location='query'
 #  )
 def get_students(request):
-    students = Student.objects.select_related('group')
+    students = Student.objects.select_related('group', 'headman_group')
 
     filter_form = StudentFilterForm(data=request.GET, queryset=students)
     # if len(args) != 0 and args.get('first_name') or args.get('last_name'):

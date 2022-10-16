@@ -7,7 +7,7 @@ from groups.models import Group
 
 
 def get_groups(request):
-    groups = Group.objects.all()
+    groups = Group.objects.select_related('headman', 'course')
     filter_form = GroupFilterSet(data=request.GET, queryset=groups)
     return render(request=request,
                   template_name='list_of_group.html',

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Detail of {{ course.title }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+    <div class="col-4"></div>
+    <div class="col">
+        <div class="card" style="width: 18rem;">
+  <div class="card-header">
+      <a href="{% url 'course:edit' course.pk %}"> {{ course.title }}</a>
+  </div>
+        <a class="btn btn-outline-primary mt-3" href="{% url 'course:list' %}">Back to list</a>
+    </div>
+        <div class="col-4"></div>
+</div>
+    </div>
+{% endblock %}

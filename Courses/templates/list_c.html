@@ -2,7 +2,7 @@
 
 {% load crispy_forms_filters %}
 
-{% block title %}List of Students{% endblock %}
+{% block title %}List of Courses{% endblock %}
 
 {% block content %}
     <div class="row">
@@ -28,28 +28,20 @@
         <thead>
             <tr>
                 <th>N</th>
-                <th>Group Name</th>
-                <th>Date of start</th>
-                <th>Headman</th>
                 <th>Course</th>
+                <th>Price</th>
                 <th><i class="bi bi-pencil-fill"></i></th>
                 <th><i class="bi bi-trash3-fill"></i></th>
             </tr>
         </thead>
         <tbody>
-        {% for group in filter_form.qs %}
+        {% for course in filter_form.qs %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td><a href="{% url 'group:detail' group.pk %}">{{ group.group_name }}</a></td>
-                <td>{{ group.date_of_start }}</td>
-                <td>{% if group.headman %}
-                        {{ group.headman.first_name }} {{ group.headman.last_name }}
-                    {% endif %}</td>
-                <td>{% if group.course %}
-                        {{ group.course.title }}
-                    {% endif %}</td>
-                <td><a class="btn btn-outline-primary"  href="{% url 'group:edit' group.pk %}">Edit</a></td>
-                <td><a class="btn btn-outline-danger" href="{% url 'group:delete' group.pk %}">Delete</a></td>
+                <td><a href="{% url 'course:detail' course.pk %}">{{ course.title }}</a></td>
+                <td>{{ course.price }}</td>
+                <td><a class="btn btn-outline-primary"  href="{% url 'course:edit' course.pk %}">Edit</a></td>
+                <td><a class="btn btn-outline-danger" href="{% url 'course:delete' course.pk %}">Delete</a></td>
             </tr>
         {% endfor %}
         </tbody>

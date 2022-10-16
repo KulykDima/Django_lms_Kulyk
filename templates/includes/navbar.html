@@ -21,6 +21,14 @@
             <li><a class="dropdown-item" href="{% url 'student:create' %}">Create Student</a></li>
             <li><a class="dropdown-item" href="{% url 'student:list' %}">List</a></li>
           </ul>
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Courses
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'course:create' %}">Create Course</a></li>
+            <li><a class="dropdown-item" href="{% url 'course:list' %}">List</a></li>
+          </ul>
            <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Groups

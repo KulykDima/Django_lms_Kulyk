@@ -24,5 +24,12 @@ class Group(models.Model):
 
     headman = models.OneToOneField('students.Student', on_delete=models.SET_NULL, null=True, blank=True, related_name='headman_group')
 
+    course = models.OneToOneField('Courses.Course',
+                                  on_delete=models.SET_NULL,
+                                  null=True,
+                                  blank=True,
+                                  related_name='course_group',
+                                  )
+
     def __str__(self):
         return f'Group name: {self.group_name}'
