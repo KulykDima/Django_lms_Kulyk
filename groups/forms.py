@@ -27,18 +27,20 @@ class CreateGroupForm(forms.ModelForm):
 
 
 class EditGroup(forms.ModelForm):
-    from students.models import Student
-    students = forms.ModelMultipleChoiceField(queryset=Student.objects.select_related('group'), required=False)
-
-    def save(self, commit=True):
-        group = super().save(commit)
-        students = self.cleaned_data['students']
-        for student in students:
-            student.group = group
-            student.save()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['headman_field'] = forms.ChoiceField(
+            choices=[(st.pk, f'{st.first_name} {st.last_name}') for st in self.instance.students.all()],
+            label='Headman_Group',
+            required=False
+        )
+        self.fields['headman_field'].choices.insert(0, (0, '-------'))
     class Meta:
         model = Group
         fields = '__all__'
+        exclude = [
+            'headman'
+        ]
 
         widgets = {
             'date_of_start': forms.DateInput(attrs={'type': 'date'})
