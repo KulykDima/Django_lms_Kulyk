@@ -10,11 +10,7 @@ from teachers.models import Teacher
 class CreateTeacher(forms.ModelForm):
     class Meta:
         model = Teacher
-        fields = [
-            'first_name',
-            'last_name',
-            'phone',
-        ]
+        fields = '__all__'
 
     def clean(self):
         pass
@@ -38,11 +34,7 @@ class CreateTeacher(forms.ModelForm):
 class EditTeacher(forms.ModelForm):
     class Meta:
         model = Teacher
-        fields = [
-            'first_name',
-            'last_name',
-            'phone',
-        ]
+        fields = '__all__'
 
     def clean(self):
         pass

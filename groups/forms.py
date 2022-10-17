@@ -27,13 +27,18 @@ class CreateGroupForm(forms.ModelForm):
 
 
 class EditGroup(forms.ModelForm):
-
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['headman_field'] = forms.ChoiceField(
+            choices=[(st.pk, f'{st.first_name} {st.last_name}') for st in self.instance.students.all()],
+            label='Headman_Group',
+            required=False
+        )
+        self.fields['headman_field'].choices.insert(0, (0, '-------'))
     class Meta:
         model = Group
-        fields = [
-            'group_name',
-            'group_description',
-            'date_of_start',
+        fields = '__all__'
+        exclude = [
             'headman'
         ]
 

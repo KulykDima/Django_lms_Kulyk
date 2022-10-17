@@ -2,8 +2,8 @@
     <thead>
         <tr align="center">
             <th style="width: 55px;">N</th>
-            <th>First name</th>
-            <th>Last name</th>
+            <th style="width: 150px">First name</th>
+            <th style="width: 150px;">Last name</th>
             <th style="width: 55px;">Age</th>
             <th style="width: 55px;">Headman</th>
             {% if group_on %}
@@ -16,16 +16,16 @@
     <tbody>
         {% for student in objects_list %}
             <tr>
-                <td>{{ forloop.counter }}</td>
-                <td><a href="{% url 'student:detail' student.pk %}">{{ student.first_name }}</a></td>
-                <td>{{ student.last_name }}</td>
-                <td>{% if student.get_age %}{{ student.get_age }}{% endif %}</td>
-                <td align="center">
+                <td style="width: 55px;" align="center">{{ forloop.counter }}</td>
+                <td style="width: 150px;" align="center"><a href="{% url 'student:detail' student.pk %}">{{ student.first_name }}</a></td>
+                <td style="width: 150px;" align="center">{{ student.last_name }}</td>
+                <td style="width: 55px;" align="center">{% if student.get_age %}{{ student.get_age }}{% endif %}</td>
+                <td align="center" style="width: 55px;">
                     {% if student.headman_group %}<i class="bi bi-check2-circle"></i>{% endif %}</td>
                 {% if group_on %}
-                    <td>{{ student.group.name }}</td>
-                    <td align="center"><a class="btn btn-outline-primary btn-sm" href="{% url 'student:edit' student.pk %}">Edit</a></td>
-                    <td align="center"><a class="btn btn-outline-danger btn-sm" href="{% url 'student:delete' student.pk %}">Delete</a></td>
+                    <td style="width: 150px;" align="center">{{ student.group.group_name }}</td>
+                    <td style="width: 85px;" align="center"><a class="btn btn-outline-primary btn-sm" href="{% url 'student:edit' student.pk %}">Edit</a></td>
+                    <td style="width: 85px;" align="center"><a class="btn btn-outline-danger btn-sm" href="{% url 'student:delete' student.pk %}">Delete</a></td>
                 {% endif %}
             </tr>
         {% endfor %}

@@ -1,7 +1,7 @@
-from django.db.models import Q      # noqa
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.views.generic import UpdateView
 
 from .forms import CreateStudentForm, EditStudentForm, StudentFilterForm
 from .models import Student
@@ -15,7 +15,7 @@ from .models import Student
 #     location='query'
 #  )
 def get_students(request):
-    students = Student.objects.select_related('group')
+    students = Student.objects.select_related('group', 'headman_group')
 
     filter_form = StudentFilterForm(data=request.GET, queryset=students)
     # if len(args) != 0 and args.get('first_name') or args.get('last_name'):
@@ -69,15 +69,11 @@ def create_student(request):
     return render(request, 'students/create.html', {'form': form})
 
 
-def edit_student(request, student_id):
-    # EditStudentForm
-    post = get_object_or_404(Student, id=student_id)
-    form = EditStudentForm(request.POST or None, instance=post)
-    if form.is_valid():
-        form.save()
-        return HttpResponseRedirect(reverse('student:list'))
-
-    return render(request, 'students/edit.html', {'form': form})
+class UpdateStudentView(UpdateView):
+    model = Student
+    form_class = EditStudentForm
+    success_url = reverse_lazy('student:list')
+    template_name = 'students/edit.html'
 
 
 def delete_student(request, student_id):

@@ -3,7 +3,7 @@
 {% load crispy_forms_filters %}
 
 {% block title %}
-Edit group
+Edit course
 {% endblock %}
 
 {% block content %}
@@ -16,14 +16,9 @@ Edit group
                     {{ form|crispy }}
                 </table>
                 <input class="btn btn-outline-primary" type="submit" value="Update">
-                <a class="btn btn-outline-success" href="{% url 'group:list' %}">Cancel</a>
+                <a class="btn btn-outline-success" href="{% url 'course:list' %}">Cancel</a>
             </form>
         </div>
         <div class="col-3"></div>
-    </div>
-    <div class="row">
-        {%  with objects_list=students.students.all group_on=False %}
-            {% include 'includes/students_table.html' %}
-        {% endwith %}
     </div>
 {% endblock %}
