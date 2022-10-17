@@ -8,7 +8,7 @@ from groups.models import Group
 
 
 class CreateGroupForm(forms.ModelForm):
-    from students.models import Student
+    from students.views import Student
     students = forms.ModelMultipleChoiceField(queryset=Student.objects.select_related('group'), required=False)
 
     def save(self, commit=True):
@@ -17,6 +17,7 @@ class CreateGroupForm(forms.ModelForm):
         for student in students:
             student.group = group
             student.save()
+
     class Meta:
         model = Group
         fields = '__all__'
@@ -35,6 +36,7 @@ class EditGroup(forms.ModelForm):
             required=False
         )
         self.fields['headman_field'].choices.insert(0, (0, '-------'))
+
     class Meta:
         model = Group
         fields = '__all__'
