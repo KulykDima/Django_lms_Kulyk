@@ -57,6 +57,8 @@ INSTALLED_APPS = [
 
     'core.apps.CoreConfig',
 
+    'accounts.apps.AccountsConfig',
+
     "debug_toolbar",
 ]
 
@@ -158,3 +160,5 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+EMAIL_PORT = 1025
