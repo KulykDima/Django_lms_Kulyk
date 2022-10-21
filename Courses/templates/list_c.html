@@ -30,8 +30,10 @@
                 <th>N</th>
                 <th>Course</th>
                 <th>Price</th>
+                {% if user.is_authenticate %}
                 <th><i class="bi bi-pencil-fill"></i></th>
                 <th><i class="bi bi-trash3-fill"></i></th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -40,8 +42,10 @@
                 <td>{{ forloop.counter }}</td>
                 <td><a href="{% url 'course:detail' course.pk %}">{{ course.title }}</a></td>
                 <td>{{ course.price }}</td>
-                <td><a class="btn btn-outline-primary"  href="{% url 'course:edit' course.pk %}">Edit</a></td>
-                <td><a class="btn btn-outline-danger" href="{% url 'course:delete' course.pk %}">Delete</a></td>
+                {% if user.is_authenticated %}
+                    <td><a class="btn btn-outline-primary"  href="{% url 'course:edit' course.pk %}">Edit</a></td>
+                    <td><a class="btn btn-outline-danger" href="{% url 'course:delete' course.pk %}">Delete</a></td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>

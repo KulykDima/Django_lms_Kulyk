@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
@@ -20,21 +21,21 @@ class DetailTeacherView(DetailView):
     template_name = 'detail_of_teacher.html'
 
 
-class UpdateTeacherView(UpdateView):
+class UpdateTeacherView(LoginRequiredMixin, UpdateView):
     model = Teacher
     form_class = EditTeacher
     success_url = reverse_lazy('teacher:list')
     template_name = 'edit_t.html'
 
 
-class CreateTeacherView(CreateView):
+class CreateTeacherView(LoginRequiredMixin, CreateView):
     model = Teacher
     form_class = CreateTeacher
     success_url = reverse_lazy('teacher:list')
     template_name = 'create_t.html'
 
 
-class DeleteTeacherView(DeleteView):
+class DeleteTeacherView(LoginRequiredMixin, DeleteView):
     model = Teacher
     template_name = 'delete_t.html'
     success_url = reverse_lazy('teacher:list')
