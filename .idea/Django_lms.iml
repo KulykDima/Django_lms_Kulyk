@@ -29,6 +29,7 @@
         <option value="$MODULE_DIR$/groups/templates" />
         <option value="$MODULE_DIR$/teachers/templates" />
         <option value="$MODULE_DIR$/Courses/templates" />
+        <option value="$MODULE_DIR$/accounts/templates" />
       </list>
     </option>
   </component>

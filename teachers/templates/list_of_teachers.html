@@ -31,19 +31,24 @@
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Phone</th>
-                <th><i class="bi bi-pencil-fill"></i></th>
-                <th><i class="bi bi-trash3-fill"></i></th>
+                {% if user.is_authenticated %}
+                    <th><i class="bi bi-pencil-fill"></i></th>
+                    <th><i class="bi bi-trash3-fill"></i></th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
-        {% for teacher in filter_form.qs %}
+        {% for teacher in object_list %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td><a href="{% url 'teacher:detail' teacher.pk %}">{{ teacher.first_name }}</a></td>
+                <td>{% if user.is_authenticated %}<a href="{% url 'teacher:detail' teacher.pk %}">{{ teacher.first_name }}</a></td>
+                <td>{% else %} {{ teacher.first_name }}</td> {% endif %}
                 <td>{{ teacher.last_name }}</td>
                 <td>{{ teacher.phone }}</td>
-                <td><a class="btn btn-outline-primary"  href="{% url 'teacher:edit' teacher.pk %}">Edit</a></td>
-                <td><a class="btn btn-outline-danger" href="{% url 'teacher:delete' teacher.pk %}">Delete</a></td>
+                {% if user.is_authenticated %}
+                    <td><a class="btn btn-outline-primary"  href="{% url 'teacher:edit' teacher.pk %}">Edit</a></td>
+                    <td><a class="btn btn-outline-danger" href="{% url 'teacher:delete' teacher.pk %}">Delete</a></td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>
