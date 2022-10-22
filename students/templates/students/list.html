@@ -17,7 +17,7 @@
               <div class="accordion-body">
                 <div class="col">
                     <form method="get">
-                        {{ filter_form.form|crispy }}
+                        {{ object_list.form|crispy }}
                         <input class="btn btn-outline-primary mt-3" type="submit" value="Search">
                     </form>
                 </div>
@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="row">
-        {% with objects_list=filter_form.qs group_on=True %}
+        {% with objects_list=object_list group_on=True %}
             {%  include 'includes/students_table.html' %}
         {% endwith %}
     </div>
