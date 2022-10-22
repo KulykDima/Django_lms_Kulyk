@@ -37,6 +37,7 @@ class Student(models.Model):
         max_length=20,
         verbose_name='phone',
         db_column='phone',
+        blank=True
     )
     group = models.ForeignKey(Group, on_delete=models.CASCADE, null=True, related_name='students')
 

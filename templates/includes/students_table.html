@@ -14,7 +14,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for student in objects_list %}
+        {% for student in object_list %}
             <tr>
                 <td style="width: 55px;" align="center">{{ forloop.counter }}</td>
                 <td style="width: 150px;" align="center"><a href="{% url 'student:detail' student.pk %}">{{ student.first_name }}</a></td>
