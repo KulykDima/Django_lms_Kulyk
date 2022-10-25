@@ -26,7 +26,7 @@ class GroupListFilter(admin.SimpleListFilter):
 
 
 class GroupAdmin(admin.ModelAdmin):
-    list_display = ('group_name', 'date_of_start', 'headman', 'course')
+    list_display = ('group_name', 'date_of_start', 'headman', 'count')
     list_display_links = list_display
     list_per_page = 15
     list_filter = (GroupListFilter, )
@@ -36,6 +36,10 @@ class GroupAdmin(admin.ModelAdmin):
         ('Courses', {'fields': ('course', 'headman', 'teachers')}),
         (None, {'fields': ('end_date',)}),
     )
+
+    def count(self, instance):
+        if instance.students:
+            return instance.students.count()
 
 
 admin.site.register(Group, GroupAdmin)
