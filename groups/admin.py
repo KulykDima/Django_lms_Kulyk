@@ -2,7 +2,21 @@ from django.contrib import admin    # noqa
 
 from Courses.models import Course
 from groups.models import Group
-from students.models import Student
+
+
+class StudentInlineTable(admin.TabularInline):
+    from students.models import Student
+    model = Student
+    fields = ('first_name', 'last_name')
+    extra = 0
+    readonly_fields = fields
+    # show_change_link = True
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request, obj):
+        return False
 
 
 class GroupListFilter(admin.SimpleListFilter):
@@ -25,12 +39,13 @@ class GroupListFilter(admin.SimpleListFilter):
                 return Group.objects.filter(course=Course.objects.get(pk=int(self.value())))
 
 
+@admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
     list_display = ('group_name', 'date_of_start', 'headman', 'count')
     list_display_links = list_display
     list_per_page = 15
     list_filter = (GroupListFilter, )
-
+    # fields = ('group_name', ('date_of_start, 'end_date'), 'teachers', 'headman')
     fieldsets = (
         ('Main info', {'fields': ('group_name', 'date_of_start', 'group_description')}),
         ('Courses', {'fields': ('course', 'headman', 'teachers')}),
@@ -41,5 +56,13 @@ class GroupAdmin(admin.ModelAdmin):
         if instance.students:
             return instance.students.count()
 
+    def get_form(self, request, obj=None, change=False, **kwargs):
+        form = super().get_form(request, obj, change, **kwargs)
+        form.base_fields['headman'].widget.can_add_related = False
+        form.base_fields['headman'].widget.can_change_related = False
+        form.base_fields['headman'].widget.can_delete_related = False
+        form.base_fields['headman'].widget.can_view_related = False
 
-admin.site.register(Group, GroupAdmin)
+        return form
+
+    inlines = [StudentInlineTable, ]
