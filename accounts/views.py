@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
@@ -20,6 +21,14 @@ class AccountRegisterView(CreateView):
 
 class AccountLoginView(LoginView):
     template_name = 'login.html'
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f'User <{self.request.user}> has successfully logged in')
+        # messages.error(self.request, f'User <{self.request.user}> has successfully logged in')
+        # messages.info(self.request, f'User <{self.request.user}> has successfully logged in')
+        # messages.warning(self.request, f'User <{self.request.user}> has successfully logged in')
+        return response
 
     def get_redirect_url(self):
         param_next = self.request.GET.get('next')
