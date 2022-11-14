@@ -19,6 +19,24 @@ class StudentInlineTable(admin.TabularInline):
         return False
 
 
+class TeachersInlineTable(admin.TabularInline):
+    model = Group.teachers.through
+    fields = ('teacher_name', 'teacher_lastname')
+    readonly_fields = fields
+
+    def teacher_name(self, obj):
+        return obj.teacher.first_name
+
+    def teacher_lastname(self, obj):
+        return obj.teacher.last_name
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request, obj):
+        return True
+
+
 class GroupListFilter(admin.SimpleListFilter):
     title = 'Course filter'
     parameter_name = 'course_filter'
@@ -48,7 +66,7 @@ class GroupAdmin(admin.ModelAdmin):
     # fields = ('group_name', ('date_of_start, 'end_date'), 'teachers', 'headman')
     fieldsets = (
         ('Main info', {'fields': ('group_name', 'date_of_start', 'group_description')}),
-        ('Courses', {'fields': ('course', 'headman', 'teachers')}),
+        ('Courses', {'fields': ('course', 'headman', )}),
         (None, {'fields': ('end_date',)}),
     )
 
@@ -65,4 +83,4 @@ class GroupAdmin(admin.ModelAdmin):
 
         return form
 
-    inlines = [StudentInlineTable, ]
+    inlines = [StudentInlineTable, TeachersInlineTable, ]
