@@ -11,9 +11,14 @@ from teachers.models import Teacher
 class ListTeacherView(ListView):
     model = Teacher
     template_name = 'list_of_teachers.html'
-    context_object_name = 'posts'
-    filterset_class = TeacherFilterForm
-    paginate_by = 50
+    # context_object_name = 'posts'
+    # paginate_by = 50
+
+    def get_queryset(self):
+        teacher = Teacher.objects.all()
+        filter_form = TeacherFilterForm(data=self.request.GET, queryset=teacher)
+
+        return filter_form
 
 
 class DetailTeacherView(DetailView):

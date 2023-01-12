@@ -28,7 +28,7 @@ urlpatterns = [
     path('courses/', include('Courses.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
     path('accounts/', include('accounts.urls')),
-    path('accounts/', include('django.contrib.auth.urls'))
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
 
 # https://docs.djangoproject.com:8000/   en/4.1/topics/http/urls/

@@ -42,8 +42,8 @@
         {% for group in object_list.qs %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td>{% if user.is_authenticated %}<a href="{% url 'group:detail' group.pk %}">{{ group.group_name }}</a></td>
-                <td>{% else %} {{ group.group_name }}</td> {% endif %}
+                <td>{% if user.is_authenticated %}<a href="{% url 'group:detail' group.pk %}">{{ group.group_name }}
+                    {% else %} {{ group.group_name }} {% endif %}</a></td>
                 <td>{{ group.date_of_start }}</td>
                 <td>{% if group.headman %}
                         {{ group.headman.first_name }} {{ group.headman.last_name }}

@@ -1,6 +1,8 @@
 import re
 
+import django_filters
 from django import forms
+from django.db import models
 
 from django_filters import FilterSet
 
@@ -58,7 +60,12 @@ class EditTeacher(forms.ModelForm):
 class TeacherFilterForm(FilterSet):
     class Meta:
         model = Teacher
-        fields = {
-            'first_name': ['exact', 'icontains'],
-            'last_name': ['exact', 'startswith']
+        fields = ['last_name', 'first_name']
+        filter_overrides = {
+            models.CharField: {
+                'filter_class': django_filters.CharFilter,
+                'extra': lambda f: {
+                    'lookup_expr': 'icontains',
+                },
+            },
         }
