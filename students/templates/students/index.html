@@ -5,5 +5,14 @@ Home
 {% endblock %}
 
 {% block content %}
-<h1>Welcome to LMS</h1>
+<h1 align="center">Welcome to LMS</h1>
+    {% if user.is_authenticated %}
+        <div align="center"><div>You've already authenticated</div>
+        <a class="btn btn-outline-primary mt-3" href="{% url 'accounts:profile_view' %}">Profile</a></div>
+    {% else %}
+        <div align="center"><div><strong>If you don't have an account, you can register</strong></div>
+    <a class="btn btn-outline-primary mt-1" href="{% url 'accounts:register' %}">Register</a>
+            <div><strong>If you have an account, please login</strong></div>
+    <p><a class="btn btn-outline-primary mt-1" href="{% url 'accounts:login' %}">Login</a></p></div>
+    {% endif %}
 {% endblock %}

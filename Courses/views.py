@@ -9,7 +9,7 @@ from Courses.forms import GroupFilterSet
 
 
 def get_course(request):
-    courses = Course.objects.all()
+    courses = Course.objects.select_related('course_group')
     filter_form = GroupFilterSet(data=request.GET, queryset=courses)
     return render(request=request,
                   template_name='list_c.html',

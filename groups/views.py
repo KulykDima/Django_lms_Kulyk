@@ -13,7 +13,7 @@ class ListGroupView(ListView):
     template_name = 'list_of_group.html'
 
     def get_queryset(self):
-        groups = Group.objects.all()
+        groups = Group.objects.select_related('headman__group', 'course')
         filter_form = GroupFilterSet(data=self.request.GET, queryset=groups)
 
         return filter_form
