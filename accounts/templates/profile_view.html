@@ -10,8 +10,8 @@
                 <div class="row align-items-center flex-row-reverse">
                     <div class="col-lg-6">
                         <div class="about-text go-to">
-                            <h3 class="dark-color" style="color:Black; text-shadow: #FAF 1px 0 10px">About Me</h3>
-                            <h6 class="theme-color lead">{{ user.first_name }} {{ user.last_name }}</h6>
+                            <h3 class="dark-color" style="color:Black; text-shadow: #FAF 1px 0 10px">{{ user.first_name }} {{ user.last_name }}</h3>
+                            <h6 class="theme-color lead">About Me:</h6>
                             <div class="row about-list">
                                 <div class="col-md-6">
                                     <div class="media">
@@ -21,7 +21,7 @@
                                     </div>
                                     <div class="media">
                                         <label style="color:Black; text-shadow: #FAF 1px 0 10px"><strong>Age</strong></label>
-                                        <p>22 Yr</p>
+                                        <p>{{ user.profile.get_age }}</p>
                                     </div>
                                     <div class="media">
                                         <label style="color:Black; text-shadow: #FAF 1px 0 10px"><strong>Email</strong></label>
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-5">
                         <div class="about-avatar">
                             <img src="https://bootdey.com/img/Content/avatar/avatar7.png" title="" alt="">
                         </div>
